@@ -1,0 +1,19 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            provider: google
+            client-id: 856085966769-bjt5l19o7fritg5io7lj63f2uj39p9ov.apps.googleusercontent.com
+            client-secret: yzETZtPqb_eG5kIClkoITupp
+            client-authentication-method: basic
+            authorization-grant-type: authorization_code
+            scope:
+              - openid
+              - email
+              - profile
+              - https://www.googleapis.com/auth/tasks.readonly
+        provider:
+          google:
+            issuer-uri: https://accounts.google.com
