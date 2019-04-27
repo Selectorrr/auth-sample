@@ -10,22 +10,33 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configuration.ClientDetailsServiceConfiguration;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerEndpointsConfiguration;
+import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerSecurityConfiguration;
 
 /**
  * Created by Stepan Litvinov on 25/04/2019.
  */
 @Configuration
-@Import({ ClientDetailsServiceConfiguration.class, AuthorizationServerEndpointsConfiguration.class })
+@Import({
+        ClientDetailsServiceConfiguration.class,
+        AuthorizationServerEndpointsConfiguration.class,
+        AuthorizationServerSecurityConfiguration.class
+})
 @Order(1)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
-        http.authorizeRequests()
+        http
+                .authorizeRequests()
                 .anyRequest().authenticated()
-                .and().oauth2Login()
-                .and().oauth2Client();
+                .and()
+                .formLogin()
+                .and()
+                .oauth2Login()
+                .and()
+                .oauth2Client()
+                .and()
+                .httpBasic();
     }
 
     @Override
@@ -37,7 +48,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }
