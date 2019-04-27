@@ -17,7 +17,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
  */
 @Configuration
 @Import({
-        AuthorizationServerEndpointsConfiguration.class,
         AuthorizationServerSecurityConfiguration.class
 })
 @Order(1)
