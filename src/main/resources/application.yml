@@ -22,4 +22,15 @@ spring:
             client-secret: 3bf2aa7540d53c9bf2ab2016e453ee35
             scope:
               - email
-logging.level.org.springframework.security: debug
+security:
+  oauth2:
+    client:
+      client-id: first-client
+      client-secret: noonewilleverguess
+      registered-redirect-uri: http://localhost:8081/client/login
+      auto-approve-scopes: user_info
+      scope: user_info
+      authorized-grant-types: authorization_code
+
+logging.level.org.springframework: debug
+server.servlet.session.cookie.name: sso
